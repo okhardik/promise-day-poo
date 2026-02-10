@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Poo's Promise Bond 📄❤️</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --stamp-blue: #2a4b8d;
+            --paper: #fdfaf0;
+            --pink: #ff4d6d;
+        }
+
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: #111;
+            font-family: 'Courier Prime', monospace;
+            overflow: hidden; touch-action: none;
+        }
+
+        .container {
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; height: 100vh; text-align: center;
+        }
+
+        .step { display: none; width: 90%; max-width: 400px; }
+        .step.active { display: block; animation: slideUp 0.6s ease; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* PINKY PROMISE SENSOR */
+        #pinky-sensor {
+            width: 140px; height: 140px; border: 3px dashed var(--pink);
+            border-radius: 50%; margin: 30px auto;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; cursor: pointer;
+        }
+        .pulse {
+            position: absolute; width: 100%; height: 100%;
+            border-radius: 50%; border: 2px solid var(--pink);
+            animation: pulse-ring 1.5s infinite;
+        }
+        @keyframes pulse-ring { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.4); opacity: 0; } }
+        
+        #progress-ring { position: absolute; top: 0; left: 0; transform: rotate(-90deg); }
+
+        /* STAMP PAPER */
+        #stamp-paper {
+            background: var(--paper); color: #1a1a1a;
+            padding: 15px; border-radius: 2px; text-align: left;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            max-height: 85vh; overflow-y: auto; border: 1px solid #ddd;
+        }
+        .header-box {
+            border: 4px solid var(--stamp-blue); padding: 10px;
+            margin-bottom: 20px; text-align: center; color: var(--stamp-blue);
+        }
+        .clause { margin-bottom: 12px; font-size: 0.85rem; border-bottom: 1px dashed #ccc; padding-bottom: 8px; }
+        .bold { font-weight: bold; text-decoration: underline; }
+
+        /* BUTTONS */
+        .btn {
+            background: var(--stamp-blue); color: white; border: none;
+            padding: 15px; font-family: 'Courier Prime', monospace;
+            font-weight: bold; cursor: pointer; width: 100%; margin-top: 15px;
+        }
+
+        .witness-img { width: 100%; border-radius: 10px; margin-top: 10px; border: 2px solid var(--stamp-blue); }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- STEP 1: PINKY PROMISE -->
+        <div id="step1" class="step active">
+            <h1 style="color: white; font-family: 'Fredoka';">Pinky Promise? 🤙</h1>
+            <p style="color: #aaa;">Hold your pinky finger here to start the legal process, Poo.</p>
+            
+            <div id="pinky-sensor" onmousedown="startHold()" onmouseup="endHold()" ontouchstart="startHold()" ontouchend="endHold()">
+                <div class="pulse"></div>
+                <div style="font-size: 3.5rem;">🤙</div>
+                <svg id="progress-ring" width="140" height="140">
+                    <circle id="circle" stroke="#ff4d6d" stroke-width="6" fill="transparent" r="65" cx="70" cy="70" stroke-dasharray="408" stroke-dashoffset="408"/>
+                </svg>
+            </div>
+            <p id="instruction" style="color: var(--pink); font-weight: bold;">[ UREH DABA KE RAKHO ]</p>
+        </div>
+
+        <!-- STEP 2: THE STAMP PAPER -->
+        <div id="step2" class="step">
+            <div id="stamp-paper">
+                <div class="header-box">
+                    <div style="font-size: 0.7rem; letter-spacing: 2px;">GOVERNMENT OF MY HEART</div>
+                    <div style="font-size: 1.5rem; font-weight: bold;">₹1000 BOND</div>
+                    <div style="font-size: 0.6rem;">PROMISE DAY SPECIAL | NO: POO-143</div>
+                </div>
+
+                <div class="clause">
+                    This bond is between <span class="bold">Gulam (Me)</span> and the <span class="bold">Boss (Maharani Poo)</span>.
+                </div>
+
+                <div class="clause">
+                    1. <span class="bold">Zimmedari:</span> Poo ko jab bhi bhook lagegi, snacks laane ki saari zimmedari meri hogi. No questions asked.
+                </div>
+
+                <div class="clause">
+                    2. <span class="bold">Arguments:</span> Ladai mein hamesha <span class="bold">Poo hi sahi hogi</span>. Agar main sahi hua, toh bhi main galat hoon.
+                </div>
+
+                <div class="clause">
+                    3. <span class="bold">The Girlfriend Rule:</span> I have "many girlfriends" but <span class="bold">Poo is the only Supreme Leader</span> of them all.
+                </div>
+
+                <div class="clause">
+                    4. <span class="bold">Listening:</span> Main tumhari saari office ki bhes aur stories dhyan se sununga, bina soye. 
+                </div>
+
+                <div class="clause">
+                    5. <span class="bold">Forever Promise:</span> I promise to be your safest place, your best friend, and your biggest pagal lover forever.
+                </div>
+
+                <button class="btn" onclick="nextStep(3)">I AGREE & SIGN 🖋️</button>
+            </div>
+        </div>
+
+        <!-- STEP 3: THE WITNESSES -->
+        <div id="step3" class="step">
+            <div id="stamp-paper">
+                <h2 style="text-align: center; color: var(--stamp-blue);">BOND SIGNED! ✅</h2>
+                <p style="font-size: 0.8rem; text-align: center;">Ab kuch nahi ho sakta, witnesses ready hain:</p>
+                
+                <div style="border: 2px solid var(--stamp-blue); padding: 5px; background: white;">
+                    <div style="font-size: 0.7rem; font-weight: bold; text-align: center; color: var(--stamp-blue);">OFFICIAL WITNESSES (Donkey Squad)</div>
+                    <img src="witnesses.jpg" class="witness-img">
+                </div>
+
+                <p style="text-align: center; font-weight: bold; margin-top: 15px;">Happy Promise Day, Poo! ❤️</p>
+                <button class="btn" style="background: var(--pink);" onclick="location.reload()">SEE AGAIN</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let timer;
+        let progress = 408;
+        const circle = document.getElementById('circle');
+
+        function startHold() {
+            document.getElementById('instruction').innerText = "Vadaa ho raha hai...";
+            timer = setInterval(() => {
+                progress -= 10;
+                if (progress <= 0) {
+                    progress = 0;
+                    clearInterval(timer);
+                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                    setTimeout(() => nextStep(2), 500);
+                }
+                circle.style.strokeDashoffset = progress;
+            }, 50);
+        }
+
+        function endHold() {
+            if (progress > 0) {
+                clearInterval(timer);
+                progress = 408;
+                circle.style.strokeDashoffset = progress;
+                document.getElementById('instruction').innerText = "[ UREH DABA KE RAKHO ]";
+            }
+        }
+
+        function nextStep(n) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + n).classList.add('active');
+            if(n === 3) {
+                confetti({ particleCount: 200, spread: 160, origin: { y: 0.3 } });
+            }
+        }
+    </script>
+</body>
+</html>
