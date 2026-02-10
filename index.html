@@ -6,18 +6,36 @@
     <title>Poo's Promise Bond 📄❤️</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
-    <style>
+    style>
         :root {
             --stamp-blue: #2a4b8d;
             --paper: #fdfaf0;
             --pink: #ff4d6d;
         }
 
+        /* PREVENT TEXT SELECTION ON LONG PRESS */
+        * {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Allow selection only for the bond text so she can read it */
+        #stamp-paper, .clause, .bold {
+            user-select: text;
+            -webkit-user-select: text;
+        }
+
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             background-color: #111;
             font-family: 'Courier Prime', monospace;
-            overflow: hidden; touch-action: none;
+            overflow: hidden; 
+            touch-action: none; /* Prevents scrolling during long press */
         }
 
         .container {
